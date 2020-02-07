@@ -23,3 +23,10 @@ insert into employee(emp_no, emp_name, title, manager, salary, dept, pass) value
 (3011, '¿ÃºˆπŒ', 2, 4377, 4000000, 3, password('1234567')),
 (2106, '±Ë√¢º∑', 4, 1003, 2500000, 2, password('1234567')),
 (3427, '√÷¡æ√∂', 5, 3011, 1500000, 3, password('1234567'));
+
+
+
+
+
+
+
