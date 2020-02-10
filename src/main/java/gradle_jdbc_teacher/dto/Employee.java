@@ -19,6 +19,17 @@ public class Employee {
 	public Employee(int empNo) {
 		this.empNo = empNo;
 	}
+	
+	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept,
+			Date hireDate) {
+		this.empNo = empNo;
+		this.empName = empName;
+		this.title = title;
+		this.manager = manager;
+		this.salary = salary;
+		this.dept = dept;
+		this.hireDate = hireDate;
+	}
 	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept,
 			String passwd, Date hireDate) {
 		this.empNo = empNo;
@@ -126,7 +137,7 @@ public class Employee {
 				manager.getEmpNo(), 
 				salary, 
 				dept.getDeptNo(), 
-				passwd, 
+				passwd==null?"****":passwd, 
 				String.format("%1$tF %1$tT", hireDate), 
 				pic != null?pic.length:null);
 	}
