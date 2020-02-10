@@ -39,14 +39,11 @@ public class EmployeeDaoTest {
 		dao = null;
 	}
 	
-
-
 	@Test
 	public void test1SelectEmployeeByAll() {
 		LogUtil.prnLog(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		List<Employee> list = dao.selectEmployeeByAll();
 		Assert.assertNotEquals(0, list.size());
-//		for(Employee e:list) LogUtil.prnLog(e);
 	}
 
 	@Test
@@ -71,10 +68,10 @@ public class EmployeeDaoTest {
 		}
 		Assert.assertNotNull(emp);
 		LogUtil.prnLog(emp);
-		LogUtil.prnLog(String.format("%1$tF - %1$tT %1$tY년 %1$tm월 %1$td일 %1$tH시 %1$tM분 %1$tS초 ", emp.getHireDate()));
-		
 		
 		//Date를 Calendar 로 변환하여 년/월/일 시/분/초 추출하기
+		LogUtil.prnLog(String.format("%1$tF - %1$tT %1$tY년 %1$tm월 %1$td일 %1$tH시 %1$tM분 %1$tS초 ", emp.getHireDate()));
+		
 		Calendar hire_date = Calendar.getInstance();
 		hire_date.setTime(emp.getHireDate());
 		
@@ -102,12 +99,22 @@ public class EmployeeDaoTest {
 	}
 	
 	@Test
-	public void test6LoginEmployee() {
+	public void test61LoginEmployeeSuccess() {
 		LogUtil.prnLog(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Employee emp = new Employee(1004);
 		emp.setPasswd("rootroot");
 		Employee loginEmp = dao.loginEmployee(emp);
 		Assert.assertNotNull(loginEmp);
+		LogUtil.prnLog(loginEmp);
+	}
+	
+	@Test
+	public void test62LoginEmployeeFail() {
+		LogUtil.prnLog(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Employee emp = new Employee(1004);
+		emp.setPasswd("root");
+		Employee loginEmp = dao.loginEmployee(emp);
+		Assert.assertNull(loginEmp);
 		LogUtil.prnLog(loginEmp);
 	}
 	
