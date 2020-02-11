@@ -20,6 +20,11 @@ public class Employee {
 		this.empNo = empNo;
 	}
 	
+	public Employee(int empNo, String passwd) {
+		this.empNo = empNo;
+		this.passwd = passwd;
+	}
+	
 	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept,
 			Date hireDate) {
 		this.empNo = empNo;
