@@ -1,18 +1,16 @@
 package gradle_jdbc_teacher.ui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.GridLayout;
-import javax.swing.SwingConstants;
 import java.awt.Font;
-import java.awt.event.ActionListener;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener {
@@ -20,6 +18,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private LoginFrame loginFrame;
 	private JButton btnLogOut;
+	private JLabel lblLoginName;
 	
 	public MainFrame() {
 		initialize();
@@ -33,7 +32,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel lblLoginName = new JLabel("New label");
+		lblLoginName = new JLabel("New label");
 		lblLoginName.setFont(new Font("굴림", Font.BOLD, 40));
 		lblLoginName.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblLoginName);
@@ -42,7 +41,10 @@ public class MainFrame extends JFrame implements ActionListener {
 		btnLogOut.addActionListener(this);
 		contentPane.add(btnLogOut);
 		
-		
+		loginNameRefresh();
+	}
+
+	public void loginNameRefresh() {
 		lblLoginName.setText(LoginFrame.loingEmp.getEmpName());
 	}
 

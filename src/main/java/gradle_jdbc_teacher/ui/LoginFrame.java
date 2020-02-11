@@ -2,24 +2,24 @@ package gradle_jdbc_teacher.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.JButton;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import gradle_jdbc_teacher.dto.Employee;
 import gradle_jdbc_teacher.ui.service.LoginService;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class LoginFrame extends JFrame implements ActionListener {
@@ -38,6 +38,15 @@ public class LoginFrame extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					// select Look and Feel
+					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+					
+//					UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+//					UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
+//					UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
+//					UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+//					UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+					
 					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -116,8 +125,9 @@ public class LoginFrame extends JFrame implements ActionListener {
 			main = new MainFrame();
 			main.setLoginFrame(this);
 		}
-
+		
 		dispose();
+		main.loginNameRefresh();
 		main.setVisible(true);
 	}
 	
