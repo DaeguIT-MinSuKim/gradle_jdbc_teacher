@@ -3,24 +3,33 @@ package gradle_jdbc_teacher.ui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JSpinnerDateEditor;
 
 import gradle_jdbc_teacher.dto.Title;
 import gradle_jdbc_teacher.ui.content.TitlePanel;
 
 public class TestFrame {
 
+	private static JDateChooser jde;
+	private static JLabel calP;
+
 	public static void main(String[] args) {
-//		contentPanelTest();
-		JFrame frame = new JFrame();
-		frame.setBounds(100, 100, 450, 400);
-		DepartmentUIPanel tp = new DepartmentUIPanel();
-		frame.add(tp);
-		frame.setVisible(true);
+		contentPanelTest();
+//		JFrame frame = new JFrame();
+//		frame.setBounds(100, 100, 450, 400);
+//		DepartmentUIPanel tp = new DepartmentUIPanel();
+//		frame.add(tp);
+//		frame.setVisible(true);
 	}
 
 	private static void contentPanelTest() {
@@ -29,14 +38,6 @@ public class TestFrame {
 		frame.add(tp);
 		
 		JButton btn1 = new JButton("확인");
-		btn1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Title title = tp.getItem();
-				JOptionPane.showMessageDialog(null, title);
-			}
-		});
-		
 		JButton btn2 = new JButton("취소");
 		btn2.addActionListener(new ActionListener() {
 			@Override
@@ -53,13 +54,27 @@ public class TestFrame {
 				tp.setItem(t);
 			}
 		});
+		
+		calP = new JLabel();
+		jde = new JDateChooser(new Date(), "yyyy-MM-dd hh:mm:ss");
+		
 		JPanel btns = new JPanel();
 		btns.add(btn1);
 		btns.add(btn2);
 		btns.add(btn3);
+		btns.add(jde);
+		btns.add(calP);
+		
+		btn1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Date d = jde.getDate();
+				calP.setText(String.format("%1$tF %1$tT", d));
+			}
+		});
 		
 		frame.add(btns, BorderLayout.SOUTH);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 500, 300);
 		frame.setVisible(true);
 	}
 

@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import gradle_jdbc_teacher.dto.Department;
+import gradle_jdbc_teacher.ui.content.EmployeePanel;
+import gradle_jdbc_teacher.ui.service.EmployeeUIService;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener {
@@ -99,6 +104,11 @@ public class MainFrame extends JFrame implements ActionListener {
 		loginFrame.clearTf();
 	}
 	protected void btnTitleActionPerformed(ActionEvent e) {
+		JFrame frame = new JFrame();
+		frame.setBounds(100, 100, 450, 400);
+		TitleUIPanel tp = new TitleUIPanel();
+		frame.add(tp);
+		frame.setVisible(true);
 	}
 	protected void btnDepartmentActionPerformed(ActionEvent e) {
 		JFrame frame = new JFrame();
@@ -108,5 +118,14 @@ public class MainFrame extends JFrame implements ActionListener {
 		frame.setVisible(true);
 	}
 	protected void btnEmployeeActionPerformed(ActionEvent e) {
+		JFrame frame = new JFrame();
+		frame.setBounds(100, 100, 450, 400);
+		EmployeeUIService service = new EmployeeUIService();
+		List<Department> list = service.showDeptList();
+		EmployeePanel tp = new EmployeePanel();
+		tp.setCmbDeptList(list);
+//		tp.setService(service);
+		frame.add(tp);
+		frame.setVisible(true);
 	}
 }

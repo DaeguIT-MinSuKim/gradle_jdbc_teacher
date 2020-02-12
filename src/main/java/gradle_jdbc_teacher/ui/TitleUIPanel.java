@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -13,26 +12,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
-import gradle_jdbc_teacher.dto.Department;
-import gradle_jdbc_teacher.dto.Employee;
-import gradle_jdbc_teacher.ui.content.DepartmentPanel;
+import gradle_jdbc_teacher.dto.Title;
+import gradle_jdbc_teacher.ui.content.TitlePanel;
 import gradle_jdbc_teacher.ui.exception.InvalidCheckException;
-import gradle_jdbc_teacher.ui.list.DepartmentTblPanel;
-import gradle_jdbc_teacher.ui.service.DepartmentUiService;
+import gradle_jdbc_teacher.ui.list.TitleTblPanel;
+import gradle_jdbc_teacher.ui.service.TitleUiService;
 
 @SuppressWarnings("serial")
-public class DepartmentUIPanel extends JPanel implements ActionListener {
-	private DepartmentUiService service;
-	private DepartmentTblPanel pDeptList;
-	private DepartmentPanel pDepartment; 
-	private DlgEmployee dialog;
+public class TitleUIPanel extends JPanel implements ActionListener {
+	private TitleUiService service;
+	private TitleTblPanel pTitleList;
+	private TitlePanel pTitle; 
 	
 	private JButton btnAdd;
 	private JButton btnCancel;
 	
-	public DepartmentUIPanel() {
-		service = new DepartmentUiService();
-		dialog = new DlgEmployee();
+	public TitleUIPanel() {
+		service = new TitleUiService();
 		initialize();
 	}
 	
@@ -43,8 +39,8 @@ public class DepartmentUIPanel extends JPanel implements ActionListener {
 		add(pContent);
 		pContent.setLayout(new BorderLayout(0, 0));
 		
-		pDepartment = new DepartmentPanel();
-		pContent.add(pDepartment, BorderLayout.CENTER);
+		pTitle = new TitlePanel();
+		pContent.add(pTitle, BorderLayout.CENTER);
 		
 		JPanel pBtns = new JPanel();
 		add(pBtns);
@@ -61,10 +57,10 @@ public class DepartmentUIPanel extends JPanel implements ActionListener {
 		add(pList);
 		pList.setLayout(new BorderLayout(0, 0));
 		
-		pDeptList = new DepartmentTblPanel();
-		pDeptList.loadData(service.showDepartmentList());
-		pDeptList.setPopupMenu(createPopupMenu());
-		pList.add(pDeptList, BorderLayout.CENTER);
+		pTitleList = new TitleTblPanel();
+		pTitleList.loadData(service.showTitleList());
+		pTitleList.setPopupMenu(createPopupMenu());
+		pList.add(pTitleList, BorderLayout.CENTER);
 	}
 
 	private JPopupMenu createPopupMenu() {
@@ -89,23 +85,23 @@ public class DepartmentUIPanel extends JPanel implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getActionCommand().equals("수정")) {
-				Department upDept = pDeptList.getSelectedItem();
-				pDepartment.setItem(upDept);
+				Title updateTitle = pTitleList.getSelectedItem();
+				pTitle.setItem(updateTitle);
 				btnAdd.setText("수정");
 			}
 			if (e.getActionCommand().equals("삭제")) {
-				Department delDept = pDeptList.getSelectedItem();
-				service.removeDepartment(delDept);
-				pDeptList.removeRow();
+				Title delTitle = pTitleList.getSelectedItem();
+				service.removeTitle(delTitle);
+				pTitleList.removeRow();
 				JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 			}
 			if (e.getActionCommand().contentEquals("소속 사원")) {
-				Department selectedDept = pDeptList.getSelectedItem(); //선택한 부서정보
-				List<Employee> list = service.showEmployeeGroupByDno(selectedDept);
-				dialog.setEmpList(list);
-				dialog.setTitle(selectedDept.getDeptName() + " 부서");
-	
-				dialog.setVisible(true);				
+//				Title selectedDept = pTitleList.getSelectedItem(); //선택한 부서정보
+//				List<Employee> list = service.showEmployeeGroupByDno(selectedDept);
+//				dialog.setEmpList(list);
+//				dialog.setTitle(selectedDept.getDeptName() + " 부서");
+//	
+//				dialog.setVisible(true);				
 			}
 		}
 	};
@@ -124,31 +120,31 @@ public class DepartmentUIPanel extends JPanel implements ActionListener {
 		}
 	}
 	private void btnUpdateActionPerformed(ActionEvent e) {
-		Department newDept = pDepartment.getItem();
-		service.modifyDepartment(newDept);
-		pDeptList.updateRow(newDept, pDeptList.getSelectedRowIdx());
+		Title newTitle = pTitle.getItem();
+		service.modifyTitle(newTitle);
+		pTitleList.updateRow(newTitle, pTitleList.getSelectedRowIdx());
 		btnAdd.setText("추가");
-		pDepartment.clearTf();
-		JOptionPane.showMessageDialog(null, "부서가 수정되었습니다.");		
+		pTitle.clearTf();
+		JOptionPane.showMessageDialog(null, "직책이 수정되었습니다.");		
 	}
 
 	protected void btnCancelActionPerformed(ActionEvent e) {
-		pDepartment.clearTf();
+		pTitle.clearTf();
 	}
 	
 	protected void btnAddActionPerformed(ActionEvent e) {
 		try {
-			Department newDept = pDepartment.getItem();
-			service.addDepartment(newDept);
-			pDeptList.addItem(newDept);
-			pDepartment.clearTf();
-			JOptionPane.showMessageDialog(null, "부서가 추가되었습니다.");
+			Title newTitle = pTitle.getItem();
+			service.addTitle(newTitle);
+			pTitleList.addItem(newTitle);
+			pTitle.clearTf();
+			JOptionPane.showMessageDialog(null, "직책이 추가되었습니다.");
 		}catch(InvalidCheckException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}catch(Exception e1) {
 			SQLException e2 = (SQLException) e1;
 			if (e2.getErrorCode() == 1062) {
-				JOptionPane.showMessageDialog(null, "부서번호가 중복");
+				JOptionPane.showMessageDialog(null, "직책가 중복");
 				System.err.println(e2.getMessage());
 				return;
 			}
