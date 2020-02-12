@@ -34,6 +34,22 @@ public class EmployeeUIService {
 	public List<Title> showTitleList() {
 		return titleDao.selectTitleByAll();
 	}
+
+	public List<Employee> showEmployeeList() {
+		return empDao.selectEmployeeByAll();
+	}
+
+	public void removeEmployee(Employee emp) {
+		empDao.deleteEmployee(emp);
+	}
+
+	public void modifyEmployee(Employee emp) {
+		empDao.updateEmployee(emp);
+	}
+
+	public void addEmployee(Employee emp) {
+		empDao.insertEmployee(emp);
+	}
 	
 	
 }
