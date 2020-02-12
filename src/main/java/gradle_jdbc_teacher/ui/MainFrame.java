@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -124,7 +126,15 @@ public class MainFrame extends JFrame implements ActionListener {
 		List<Department> list = service.showDeptList();
 		EmployeePanel tp = new EmployeePanel();
 		tp.setCmbDeptList(list);
-//		tp.setService(service);
+		tp.getCmbDept().addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					tp.setCmbManagerList(service.showManagerList((Department)e.getItem()));
+				}
+			}
+		});
+		tp.setCmbTitleList(service.showTitleList());
 		frame.add(tp);
 		frame.setVisible(true);
 	}

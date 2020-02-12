@@ -18,5 +18,4 @@ public interface EmployeeDao {
 	Employee loginEmployee(Employee emp);
 	
 	List<Employee> selectEmployeeGroupByDno(Department dept);
-
 }
