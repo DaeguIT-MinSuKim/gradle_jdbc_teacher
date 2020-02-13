@@ -2,9 +2,7 @@ package gradle_jdbc_teacher.ui.list;
 
 import javax.swing.SwingConstants;
 
-import gradle_jdbc_teacher.dto.Department;
 import gradle_jdbc_teacher.dto.Employee;
-import gradle_jdbc_teacher.dto.Title;
 
 @SuppressWarnings("serial")
 public class EmployeeTblPanel extends AbstractTblPanel<Employee> {
@@ -68,12 +66,6 @@ public class EmployeeTblPanel extends AbstractTblPanel<Employee> {
 		model.setValueAt(String.format("%tF", item.getHireDate()), updateIdx, 6);
 		String picExist = item.getPic()==null?"없음":"있음";
 		model.setValueAt(picExist, updateIdx, 7);//소속부서번호	
-	}
-
-	@Override
-	public Employee getSelectedItem() {
-		int selectedIdx = getSelectedRowIdx();
-		return list.get(selectedIdx);
 	}
 
 }

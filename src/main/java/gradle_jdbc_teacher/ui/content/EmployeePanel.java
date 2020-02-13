@@ -64,7 +64,6 @@ public class EmployeePanel extends AbsItemPanel<Employee> implements ActionListe
 	private JDateChooser tfHireDate;
 	private String picPath;
 	
-	
 	public EmployeePanel() {
 		setLayout(new BorderLayout(0, 0));
 

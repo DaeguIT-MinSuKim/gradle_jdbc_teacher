@@ -1,7 +1,5 @@
 package gradle_jdbc_teacher.dao;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 import gradle_jdbc_teacher.dto.Department;
