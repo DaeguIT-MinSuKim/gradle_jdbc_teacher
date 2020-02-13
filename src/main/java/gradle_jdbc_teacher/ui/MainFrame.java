@@ -105,6 +105,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		loginFrame.setVisible(true);
 		loginFrame.clearTf();
 	}
+	
 	protected void btnTitleActionPerformed(ActionEvent e) {
 		JFrame frame = new JFrame();
 		frame.setBounds(100, 100, 450, 400);
@@ -112,6 +113,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		frame.add(tp);
 		frame.setVisible(true);
 	}
+	
 	protected void btnDepartmentActionPerformed(ActionEvent e) {
 		JFrame frame = new JFrame();
 		frame.setBounds(100, 100, 450, 400);
@@ -119,6 +121,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		frame.add(tp);
 		frame.setVisible(true);
 	}
+	
 	protected void btnEmployeeActionPerformed(ActionEvent e) {
 		JFrame frame = new JFrame();
 		frame.setBounds(100, 100, 450, 700);
